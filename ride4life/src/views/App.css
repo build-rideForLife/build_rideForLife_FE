@@ -2,3 +2,95 @@
   text-align: center;
   background: white;
 }
+
+.leaflet-container {
+  height: 420px;
+  width: 100%;
+  z-index: 0;
+}
+
+.map-wrapper{
+  position: relative;
+}
+
+#map-instructions {
+  position: absolute;
+  margin: 20px 50px ;
+  width: 25%;
+  top: 0;
+  height: 300px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  /*overflow-y: scroll;*/
+  font-family: sans-serif;
+  font-size: 0.8em;
+  line-height: 2em;
+  z-index: 100;
+  overflow:hidden;
+
+}
+
+#map-instructions input{
+  width:100%;
+  height: 40px;
+  padding: 0 10px;
+  margin-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+#map-instructions h1{
+  color: #444;
+  font-size: 1.2rem;
+}
+
+#map-instructions input[type="text"]:first-of-type{
+  margin-top: 20px;
+}
+
+/*
+ DRIVERS
+*/
+
+.drivers-container{
+  display:flex;
+  background-color: white;
+  padding:20px;
+}
+
+.driver-item-container{
+   width: 200px;
+   height: 300px;
+   background-color: #2E3574;
+   box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18) ;
+   border-radius:12px;
+   margin-right: 20px;
+   border:1px solid #2E3574;
+   transition: all 0.3s ease
+}
+
+.driver-item-container:hover{
+  transform: scale(1.2)
+}
+
+
+.driver-img-container{
+  width:100%;
+  height: 200px;
+}
+
+.driver-img-container img{
+  border-radius:12px 12px 0 0;
+  height: 100%;
+}
+
+.driver-item-content{
+  text-align: left;
+  padding:14px;
+  color: white;
+
+}
+
+.driver-item-content h1{
+  margin: 0;
+  padding:0;
+}

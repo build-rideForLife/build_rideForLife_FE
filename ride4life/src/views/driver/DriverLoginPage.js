@@ -9,6 +9,7 @@ import GridItem from "../../components/Grid/GridItem";
 import CardHeader from "../../components/Card/CardHeader";
 import withStyles from "@material-ui/core/styles/withStyles";
 import loginPageStyle from "assets/jss/material-kit-pro-react/views/loginPageStyle.jsx";
+import Phone from "@material-ui/icons/Phone";
 // import image from "assets/img/bg7.jpg";
 import Button from "../../components/CustomButtons/Button";
 import CustomInput from "../../components/CustomInput/CustomInput";
@@ -23,7 +24,7 @@ import {Link} from "react-router-dom";
 class DriverLoginPage extends React.Component {
 	state = {
 		credentials: {
-			username: 'ellen',
+			phone: '6509522257',
 			password: '0000'
 		}
 	};
@@ -50,12 +51,15 @@ class DriverLoginPage extends React.Component {
 		   this.props.history.push('/driver-home');
 		});
 	};
+	styles = {
+		marginBottom:"3rem"
+	}
 	
 	render() {
 		const { classes } = this.props;
 		return (
 			<div>
-				<div className={classes.container}>
+				<div className={this.styles.marginBottom}>
 					<GridContainer justify="center">
 						<GridItem xs={12} sm={12} md={4}>
 							<Card>
@@ -71,32 +75,6 @@ class DriverLoginPage extends React.Component {
 												Sign Up
 											</Link>
 										</h4>
-										<div className={classes.socialLine}>
-											<Button
-												justIcon
-												color="transparent"
-												className={classes.iconButtons}
-												onClick={e => e.preventDefault()}
-											>
-												<i className="fab fa-twitter" />
-											</Button>
-											<Button
-												justIcon
-												color="transparent"
-												className={classes.iconButtons}
-												onClick={e => e.preventDefault()}
-											>
-												<i className="fab fa-facebook" />
-											</Button>
-											<Button
-												justIcon
-												color="transparent"
-												className={classes.iconButtons}
-												onClick={e => e.preventDefault()}
-											>
-												<i className="fab fa-google-plus-g" />
-											</Button>
-										</div>
 									</CardHeader>
 									<p
 										className={`${classes.description} ${classes.textCenter}`}
@@ -104,16 +82,16 @@ class DriverLoginPage extends React.Component {
 									</p>
 									<CardBody signup>
 										<CustomInput
-											id="first"
+											id="phone"
 											formControlProps={{
 												fullWidth: true
 											}}
 											inputProps={{
-												placeholder: "Useraname",
+												placeholder: "Phone",
 												type: "text",
 												startAdornment: (
 													<InputAdornment position="start">
-														<Face className={classes.inputIconsColor} />
+														<Phone className={classes.inputIconsColor} />
 													</InputAdornment>
 												)
 											}}
