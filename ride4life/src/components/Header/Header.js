@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , withRouter} from "react-router-dom";
 import classNames from "classnames";
 import {connect} from 'react-redux'
 // nodejs library to set properties for components
@@ -25,12 +25,13 @@ import {logoutUser} from "../../actions";
 class Header extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			mobileOpen: false,
-		};
 		this.handleDrawerToggle = this.handleDrawerToggle.bind(this);
 		this.headerColorChange = this.headerColorChange.bind(this);
 	}
+    state = {
+		mobileOpen: false,
+	};
+
 	handleDrawerToggle() {
 		this.setState({ mobileOpen: !this.state.mobileOpen });
 	}
@@ -42,7 +43,6 @@ class Header extends React.Component {
 	
 	logout(){
 		this.props.logoutUser()
-		this.props.history.push('/rider-logout');
 	}
 	
 	headerColorChange() {
@@ -70,7 +70,8 @@ class Header extends React.Component {
 		}
 	}
 	render() {
-		const { classes, color, links, brand, fixed, absolute, loggedInUser } = this.props;
+		console.log('this.props',this.props)
+		const { classes, color, links, brand, fixed, absolute } = this.props;
 		const appBarClasses = classNames({
 			[classes.appBar]: true,
 			[classes[color]]: color,
@@ -87,18 +88,20 @@ class Header extends React.Component {
 								<img src={logo} />
 							</div>
 						</Link>
-					{loggedInUser
-					  ? <div>
-							{ loggedInUser.driver
+					{this.props.loggedInUser
+					  ? <div className="login-container">
+							{ this.props.loggedInUser && this.props.loggedInUser.driver
 								?	<IconButton className={classes.titleNoUnder} onClick={this.logout}>
 										<TimeToLeave/>
+										Logout
 							        </IconButton>
 								:   <IconButton className={classes.titleNoUnder} onClick={this.logout}>
 										<ChildCare/>
+										Logout
 									</IconButton>
 							}
 						</div>
-					  : <div>
+					  : <div className="login-container">
 							<IconButton className={classes.titleNoUnder}>
 								<ChildCare/>
 								<Link className={classes.titleNoUnder}
@@ -197,16 +200,18 @@ Header.propTypes = {
 	})
 };
 
-const mapStateToProps = ({riderReducer}) => (
-	{
+const mapStateToProps = ({riderReducer}) => {
+	console.log('riderReducer.loggedInUser',riderReducer)
+	return {
 		loggedInUser:riderReducer.loggedInUser
 	}
-)
+}
+
 
 export default connect(
 	mapStateToProps,
 	{logoutUser }
-)(withStyles(headerStyle)(Header));
+)(withStyles(headerStyle)(withRouter(Header)));
 
 
 

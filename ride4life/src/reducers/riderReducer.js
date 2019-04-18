@@ -12,7 +12,13 @@ import {
 	FIND_DRIVER_BY_ID_STARTED,
 	FIND_DRIVER_BY_ID_SUCCESS,
 	FIND_DRIVER_BY_ID_FAILURE,
-	s, LOGOUT_USER
+	LOGOUT_USER,
+	SEND_TRIP_REQUEST_STARTED,
+	SEND_TRIP_REQUEST_SUCCESS,
+	SEND_TRIP_REQUEST_FAILURE,
+	SUBMIT_REVIEW_STARTED,
+	SUBMIT_REVIEW_SUCCESS,
+	SUBMIT_REVIEW_FAILURE,
 } from '../actions'
 
 
@@ -21,6 +27,8 @@ const initialState = {
 	riderLoginStarted: false,
 	findNearbyDriverStarted: false,
 	findDriverByIdStarted: false,
+	sendTripRequestStarted:false,
+	submitDriverReviewStarted:false,
 	currentDriver:
 		{
 			"driver_id": 1,
@@ -38,23 +46,39 @@ const initialState = {
 				}
 			]
 		},
-	requestDetails:{},
-	driverProfile:
-		{
-			"driver_id": 1,
-			"username": "greatDriver",
-			"reviews": [
+	requestDetails:{
+		riderDetails:
 			{
-				"rider_id": 2,
-				"review": "great ride",
-				"rating": 5
+				"requestTime" : {date:"2016-10-31T12:12:37.321Z"},
+				"location" : {
+					"coordinates" : [
+						77.612257,
+						12.934729
+					],
+					"address" : "The Forum, 21 Hosur Road, Bengaluru South, Karnataka, India"
+				},
+				"citizenId" : "citizen1",
+				"status" : "engaged",
+				"copId" : "06"
 			},
-			{
-				"rider_id": 5,
-				"review": "way too bumpy, water broke on way to hospital",
-				"rating": 2
-			}]
-		},
+		status:'pending'
+	},
+	// driverProfile:
+	// 	{
+	// 		"driver_id": 1,
+	// 		"username": "greatDriver",
+	// 		"reviews": [
+	// 		{
+	// 			"rider_id": 2,
+	// 			"review": "great ride",
+	// 			"rating": 5
+	// 		},
+	// 		{
+	// 			"rider_id": 5,
+	// 			"review": "way too bumpy, water broke on way to hospital",
+	// 			"rating": 2
+	// 		}]
+	// 	},
 		
 		driversNearby:[],
 		// {
@@ -129,6 +153,8 @@ export const riderReducer = (state = initialState, action)=>{
 				riderLoginStarted:true
 			}
 		case RIDER_LOGIN_SUCCESS:
+			console.log('RIDER_LOGIN_SUCCESS')
+			console.log('action.payload,',action.payload)
 			return {...state,
 				riderLoginStarted:false,
 				loggedInUser: action.payload
@@ -157,9 +183,10 @@ export const riderReducer = (state = initialState, action)=>{
 				findDriverByIdStarted:true
 			}
 		case FIND_DRIVER_BY_ID_SUCCESS:
+			console.log('currentDriver', action.payload)
 			return {...state,
 				findDriverByIdStarted:false,
-				currentDriver: action.payload
+				currentDriver: {...action.payload}
 			}
 		case FIND_DRIVER_BY_ID_FAILURE:
 			return {...state,
@@ -168,9 +195,33 @@ export const riderReducer = (state = initialState, action)=>{
 			
 		case LOGOUT_USER:
 			return {...state,
-				currentDriver: null
+				loggedInUser: null
 			}
-		
+			
+		case SEND_TRIP_REQUEST_STARTED:
+			return {...state,
+				sendTripRequestStarted:true
+			}
+		case SEND_TRIP_REQUEST_SUCCESS:
+			return {...state,
+				sendTripRequestStarted:false
+			}
+		case SEND_TRIP_REQUEST_FAILURE:
+			return {...state,
+				sendTripRequestStarted:false
+			}
+		case SUBMIT_REVIEW_STARTED:
+			return {...state,
+				submitDriverReviewStarted:true
+			}
+		case SUBMIT_REVIEW_SUCCESS:
+			return {...state,
+				submitDriverReviewStarted:false
+			}
+		case SUBMIT_REVIEW_FAILURE:
+			return {...state,
+				submitDriverReviewStarted:false
+			}
 		default:
 			return {...state}
 	}

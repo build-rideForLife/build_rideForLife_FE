@@ -25,17 +25,19 @@ export {
 	FIND_DRIVER_BY_ID_STARTED,
 	FIND_DRIVER_BY_ID_SUCCESS,
 	FIND_DRIVER_BY_ID_FAILURE,
+	SEND_TRIP_REQUEST_STARTED,
+	SEND_TRIP_REQUEST_SUCCESS,
+	SEND_TRIP_REQUEST_FAILURE,
+
+	SUBMIT_REVIEW_STARTED,
+	SUBMIT_REVIEW_SUCCESS,
+	SUBMIT_REVIEW_FAILURE,
 	LOGOUT_USER,
 	logoutUser,
 	getDriversById,
 	findDriversNearby,
 	signup_rider,
-	login_rider
+	login_rider,
+	sendTripRequest,
+	submitDriverReview
 }from './riderAction'
-
-export {
-	SEND_TRIP_REQUEST_STARTED,
-	SEND_TRIP_REQUEST_SUCCESS,
-	SEND_TRIP_REQUEST_FAILURE,
-	sendTripRequest
-}from './tripAction'
